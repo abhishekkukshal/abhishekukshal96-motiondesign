@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Abhishek Kukshal — Motion Designer</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="dark">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">Abhishek Kukshal</a>
+      <nav class="nav">
+        <a href="index.html" class="active">Home</a>
+        <a href="Portfolio.html">Portfolio</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <button id="menuBtn" class="menu-btn">☰</button>
+    </div>
+  </header>
+
+  <!-- Mobile navigation -->
+  <div id="mobileNav" class="mobile-nav" aria-hidden="true">
+    <button class="close-btn" onclick="toggleMobileNav(false)">✕</button>
+    <nav class="mobile-links">
+      <a href="index.html">Home</a><br><br>
+      <a href="Portfolio.html">Portfolio</a><br><br>
+      <a href="contact.html">Contact</a><br><br>
+      <!-- Mobile download button -->
+      <a id="downloadBtnMobile" class="btn btn-outline" href="#">
+        Download Resume
+      </a>
+    </nav>
+  </div>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-left">
+          <h1>Visuals that feel alive — cinematic, creative, and clear.</h1>
+          <div class="about-inline" style="margin-bottom:30px;">
+            <div class="glass-card">
+              <p class="about-text">
+                Hi, I’m Abhishek Kukshal, a motion designer with 7 years of experience in motion design, editing, and
+                compositing. I enjoy bringing ideas to life through visuals, and when I’m not designing, you’ll usually find me
+                playing a musical instrument, trekking in the hills, or working out at the gym.
+              </p>
+            </div>
+          </div>
+
+          <p class="ctas">
+            <a class="btn" href="Portfolio.html">Discover Projects</a>
+            <!-- Desktop download button -->
+            <a id="downloadBtn" class="btn btn-outline" href="#">
+              Grab My Resume
+            </a>
+          </p>
+
+          <div class="tools-block" style="margin-top:22px; max-width:640px;">
+            <div class="glass-card tools-card">
+              <h4 class="tools-heading" style="margin:0 0 10px;color:#e6eef6;">Tools I Used</h4>
+              <div class="tools-list" style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
+                <span class="chip"><img src="assets/img/tools/Logo/Adobe_After_Effects_CC_icon.svg.png" alt="AE"> After Effects</span>
+                <span class="chip"><img src="assets/img/tools/Logo/Adobe_Photoshop_CC_icon.svg.png" alt="PS"> Photoshop</span>
+                <span class="chip"><img src="assets/img/tools/Logo/Adobe_Illustrator_CC_icon.svg.png" alt="AI"> Illustrator</span>
+                <span class="chip"><img src="assets/img/tools/Logo/Adobe_Premiere_Pro_CC_icon.svg.png" alt="PR"> Premiere Pro</span>
+                <span class="chip"><img src="assets/img/tools/videoscribe.png" alt="VS"> VideoScribe</span>
+                <span class="chip"><img src="assets/img/tools/keyshot.png" alt="VS"> Keyshot</span>
+                <span class="chip"><img src="assets/img/tools/google-veo.svg" alt="VS"> Google Veo</span>
+                <span class="chip"><img src="assets/img/tools/cinema4d.png" alt="VS"> Cinema 4D</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <div class="featured-card">
+            <img class="featured-video" src="assets/img/featured.gif" alt="Featured Work">
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+    <footer class="site-footer">
+    <div class="container">
+      
+
+      <!-- copyright -->
+      <div class="footer-copyright">© Abhishek Kukshal — Motion Designer</div>
+    </div>
+  </footer>
+
+
+  <!-- Your existing main.js -->
+  <script src="assets/js/main.js"></script>
+
+  <!-- Force Download Script -->
+  <script>
+    const resumePath = 'assets/img/resume-abhishek-kukshal.pdf';  // tumhari PDF ka path
+    const saveName = 'Resume(Abhishek Kukshal).pdf';
+
+    function forceDownloadFile(path, filename) {
+      fetch(path)
+        .then(resp => resp.blob())
+        .then(blob => {
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = filename;
+          a.style.display = 'none';
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          URL.revokeObjectURL(url);
+        })
+        .catch(err => {
+          console.error('Download error:', err);
+          alert("Resume file not found.");
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      ['downloadBtn','downloadBtnMobile'].forEach(id => {
+        const btn = document.getElementById(id);
+        if (btn) {
+          btn.addEventListener('click', e => {
+            e.preventDefault();   // stop <a> opening
+            forceDownloadFile(resumePath, saveName);
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
